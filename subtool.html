@@ -79,6 +79,15 @@
             margin-bottom: 20px;
         }
         
+		
+		/* input Styles */
+        .texto-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+		
         button {
             flex: 1;
             padding: 12px 20px;
@@ -232,7 +241,9 @@
             .button-group {
                 flex-direction: column;
             }
-            
+            .texto-group {
+                flex-direction: column;
+            }
             button {
                 width: 100%;
             }
@@ -242,6 +253,27 @@
                 right: 5%;
             }
         }
+		
+		/* Firefox */
+		* {
+			scrollbar-width: thin;
+			scrollbar-color: teal gray;
+		}
+
+		/* Chrome, Edge, Safari */
+		*::-webkit-scrollbar {
+			width: 12px;
+		}
+
+		*::-webkit-scrollbar-track {
+			background: orange;
+		}
+
+		*::-webkit-scrollbar-thumb {
+			background-color: blue;
+			border-radius: 20px;
+			border: 3px solid orange;
+		}
     </style>
 </head>
 <body>
@@ -263,9 +295,12 @@
         <label for="domains">Enter Domains (one per line):</label>
         <textarea id="domains" rows="8" placeholder="e.g., subdomain.example.com"></textarea>
         
+		<div class="texto-group">
         <label for="newSubdomain">New Subdomain:</label>
-        <input type="text" id="newSubdomain" placeholder="e.g., newsub">
-        
+		<input type="text" id="newSubdomain" name="newSubdomain" placeholder="Enter new subdomain">
+		<button onclick="fetchRandomSubdomain()">Random Subdomain</button>
+        </div>
+		
         <div class="button-group">
             <button onclick="changeSubdomains()">Change Subdomains</button>
             <button onclick="addAsterisk()">Add Asterisk</button>
@@ -547,6 +582,21 @@
 				console.error('Error copying text: ', err);
 			});
 	}
+	
+	//Fetch random words 
+	function fetchRandomSubdomain() {
+    fetch('https://random-word-api.herokuapp.com/word?number=2')
+        .then(response => response.json())
+        .then(data => {
+            // Concatenate the two words with a hyphen
+            const subdomain = data[0] + '-' + data[1];
+            document.getElementById('newSubdomain').value = subdomain;
+        })
+        .catch(error => {
+            console.error('Error fetching random words:', error);
+            document.getElementById('newSubdomain').value = 'Error fetching words';
+        });
+}
 
 	// Clear All Fields
 	function clearAll() {
