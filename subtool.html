@@ -10,7 +10,7 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #121212;
@@ -22,7 +22,7 @@
             min-height: 100vh;
             padding: 20px;
         }
-        
+
         /* Container */
         .container {
             background-color: #1e1e1e;
@@ -33,13 +33,13 @@
             max-width: 800px;
             position: relative;
         }
-        
+
         h1 {
             text-align: center;
             margin-bottom: 20px;
             color: #ffffff;
         }
-        
+
         /* Form Elements */
         label {
             display: block;
@@ -47,7 +47,7 @@
             font-weight: 500;
             color: #b0b0b0;
         }
-        
+
         textarea, input[type="text"] {
             width: 100%;
             padding: 12px 15px;
@@ -60,17 +60,17 @@
             transition: border-color 0.3s ease;
             resize: vertical;
         }
-        
+
         textarea::placeholder, input[type="text"]::placeholder {
             color: #777777;
         }
-        
+
         textarea:focus, input[type="text"]:focus {
             border-color: #1abc9c;
             outline: none;
             box-shadow: 0 0 5px rgba(26, 188, 156, 0.5);
         }
-        
+
         /* Button Styles */
         .button-group {
             display: flex;
@@ -78,16 +78,15 @@
             gap: 10px;
             margin-bottom: 20px;
         }
-        
-		
-		/* input Styles */
+
+        /* input Styles */
         .texto-group {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
             margin-bottom: 20px;
         }
-		
+
         button {
             flex: 1;
             padding: 12px 20px;
@@ -99,24 +98,24 @@
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
-        
+
         button:hover {
             background-color: #16a085;
             transform: translateY(-2px);
         }
-        
+
         button:active {
             transform: translateY(0);
         }
-        
+
         button.secondary {
             background-color: #e74c3c;
         }
-        
+
         button.secondary:hover {
             background-color: #c0392b;
         }
-        
+
         /* Result Area */
         #result {
             background-color: #2c2c2c;
@@ -129,7 +128,7 @@
             padding: 12px 15px;
             resize: vertical;
         }
-        
+
         /* Notification Styles */
         .notification {
             position: fixed;
@@ -145,12 +144,12 @@
             transition: opacity 0.5s ease, transform 0.5s ease;
             z-index: 1000;
         }
-        
+
         .notification.show {
             opacity: 1;
             transform: translateY(0);
         }
-        
+
         /* History Panel */
         .history-panel {
             position: absolute;
@@ -167,23 +166,23 @@
             padding: 10px;
             z-index: 100;
         }
-        
+
         .history-panel.active {
             display: flex;
         }
-        
+
         .history-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 10px;
         }
-        
+
         .history-header h2 {
             font-size: 18px;
             color: #ffffff;
         }
-        
+
         .history-header button {
             background-color: transparent;
             color: #e0e0e0;
@@ -191,7 +190,7 @@
             cursor: pointer;
             border: none;
         }
-        
+
         .history-item {
             background-color: #2c2c2c;
             padding: 10px;
@@ -200,22 +199,22 @@
             cursor: pointer;
             transition: background-color 0.2s ease;
         }
-        
+
         .history-item:hover {
             background-color: #3d3d3d;
         }
-        
+
         .history-item-time {
             font-size: 12px;
             color: #777777;
             margin-bottom: 5px;
         }
-        
+
         .history-item-operation {
             font-size: 14px;
             color: #1abc9c;
         }
-        
+
         /* Toggle History Button */
         .toggle-history {
             position: absolute;
@@ -231,11 +230,11 @@
             transition: background-color 0.3s ease;
             z-index: 101;
         }
-        
+
         .toggle-history:hover {
             background-color: #16a085;
         }
-        
+
         /* Responsive Design */
         @media (max-width: 600px) {
             .button-group {
@@ -247,371 +246,448 @@
             button {
                 width: 100%;
             }
-            
+
             .history-panel {
                 width: 90%;
                 right: 5%;
             }
         }
-		
-		/* Firefox */
-		* {
-			scrollbar-width: thin;
-			scrollbar-color: teal gray;
-		}
 
-		/* Chrome, Edge, Safari */
-		*::-webkit-scrollbar {
-			width: 12px;
-		}
+        /* Firefox */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: teal gray;
+        }
 
-		*::-webkit-scrollbar-track {
-			background: orange;
-		}
+        /* Chrome, Edge, Safari */
+        *::-webkit-scrollbar {
+            width: 12px;
+        }
 
-		*::-webkit-scrollbar-thumb {
-			background-color: blue;
-			border-radius: 20px;
-			border: 3px solid orange;
-		}
+        *::-webkit-scrollbar-track {
+            background: orange;
+        }
+
+        *::-webkit-scrollbar-thumb {
+            background-color: blue;
+            border-radius: 20px;
+            border: 3px solid orange;
+        }
+
+        /* Loading Indicator */
+        .loading-indicator {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            display: none;
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
-    <button class="toggle-history" onclick="toggleHistory()">📜 History</button>
-    
-    <div class="history-panel" id="historyPanel">
+    <button class="toggle-history" onclick="toggleHistory()" aria-label="Toggle History">📜 History</button>
+
+    <div class="history-panel" id="historyPanel" role="region" aria-live="polite">
         <div class="history-header">
             <h2>Operation History</h2>
-            <button onclick="toggleHistory()">✖️</button>
+            <button onclick="toggleHistory()" aria-label="Close History">✖️</button>
         </div>
         <div id="historyList">
             <!-- History items will be appended here -->
         </div>
+        <button class="clear-history" onclick="clearHistory()" aria-label="Clear History">Clear History</button>
     </div>
-    
+
     <div class="container">
         <h1>Domain Subdomain Changer</h1>
-        
+
         <label for="domains">Enter Domains (one per line):</label>
-        <textarea id="domains" rows="8" placeholder="e.g., subdomain.example.com"></textarea>
-        
-		<div class="texto-group">
-        <label for="newSubdomain">New Subdomain:</label>
-		<input type="text" id="newSubdomain" name="newSubdomain" placeholder="Enter new subdomain">
-		<button onclick="fetchRandomSubdomain()">Random Subdomain</button>
+        <textarea id="domains" rows="8" placeholder="e.g., subdomain.example.com" aria-label="Enter Domains"></textarea>
+
+        <div class="texto-group">
+            <label for="newSubdomain">New Subdomain:</label>
+            <input type="text" id="newSubdomain" name="newSubdomain" placeholder="Enter new subdomain" aria-label="New Subdomain">
+            <button onclick="fetchRandomSubdomain()" aria-label="Fetch Random Subdomain">Random Subdomain</button>
         </div>
-		
+
         <div class="button-group">
-            <button onclick="changeSubdomains()">Change Subdomains</button>
-            <button onclick="addAsterisk()">Add Asterisk</button>
-            <button onclick="copyValidDomains()">Copy Valid Domains</button>
-            <button class="secondary" onclick="clearAll()">Clear All</button>
+            <button onclick="changeSubdomains()" aria-label="Change Subdomains">Change Subdomains</button>
+            <button onclick="addAsterisk()" aria-label="Add Asterisk">Add Asterisk</button>
+            <button onclick="copyValidDomains()" aria-label="Copy Valid Domains">Copy Valid Domains</button>
+            <button class="secondary" onclick="clearAll()" aria-label="Clear All">Clear All</button>
+            <input type="file" id="importFile" style="display: none;" accept=".txt" aria-label="Import Domains">
+            <button onclick="document.getElementById('importFile').click()" aria-label="Import Domains">Import Domains</button>
         </div>
-        
+
         <label for="result">Updated Domains:</label>
-        <textarea id="result" rows="10" readonly></textarea>
+        <textarea id="result" rows="10" readonly aria-label="Updated Domains"></textarea>
     </div>
 
     <!-- Notification Element -->
-    <div id="notification" class="notification"></div>
+    <div id="notification" class="notification" role="alert"></div>
+
+    <!-- Loading Indicator -->
+    <div class="loading-indicator" id="loadingIndicator">
+        <p>Processing...</p>
+    </div>
 
     <script>
-	// Initialize Web Worker
-	let worker;
-	if (window.Worker) {
-		const workerBlob = new Blob([`
-			self.onmessage = function(e) {
-				const { type, data } = e.data;
-				if (type === 'processDomains') {
-					const { domains, operation, newSubdomain } = data;
-					const validDomains = [];
-					const invalidDomains = [];
-					
-					for (let i = 0; i < domains.length; i++) {
-						const domain = domains[i].trim();
-						if (domain === '') continue;
-						const parts = domain.split('.');
-						if (parts.length < 3) {
-							invalidDomains.push(domain);
-						} else {
-							if (operation === 'changeSubdomains' && newSubdomain) {
-								parts[0] = newSubdomain;
-							} else if (operation === 'addAsterisk' && !newSubdomain) {
-								parts[0] = '*';
-							}
-							validDomains.push(parts.join('.'));
-						}
-					}
-					
-					self.postMessage({ validDomains, invalidDomains });
-				}
-			};
-		`], { type: 'application/javascript' });
-		const workerUrl = URL.createObjectURL(workerBlob);
-		worker = new Worker(workerUrl);
-	} else {
-		alert('Your browser does not support Web Workers. The application may not function as expected.');
-	}
+        // Initialize Web Worker
+        let worker;
+        if (window.Worker) {
+            const workerBlob = new Blob([`
+                self.onmessage = function(e) {
+                    const { type, data } = e.data;
+                    if (type === 'processDomains') {
+                        const { domains, operation, newSubdomain } = data;
+                        const validDomains = [];
+                        const invalidDomains = [];
 
-	// History Management
-	const historyKey = 'domainChangerHistory';
+                        for (let i = 0; i < domains.length; i++) {
+                            const domain = domains[i].trim();
+                            if (domain === '') continue;
+                            const parts = domain.split('.');
+                            if (parts.length < 2) {
+                                invalidDomains.push(domain);
+                            } else {
+                                if (operation === 'changeSubdomains' && newSubdomain) {
+                                    if (parts.length === 2) {
+                                        parts.unshift(newSubdomain);
+                                    } else {
+                                        parts[0] = newSubdomain;
+                                    }
+                                } else if (operation === 'addAsterisk' && !newSubdomain) {
+                                    if (parts.length === 2) {
+                                        parts.unshift('*');
+                                    } else {
+                                        parts[0] = '*';
+                                    }
+                                }
+                                validDomains.push(parts.join('.'));
+                            }
+                        }
 
-	function loadHistory() {
-		const history = JSON.parse(localStorage.getItem(historyKey)) || [];
-		const historyList = document.getElementById('historyList');
-		historyList.innerHTML = '';
-		history.slice().reverse().forEach((item, index) => {
-			const historyItem = document.createElement('div');
-			historyItem.className = 'history-item';
-			historyItem.onclick = () => loadHistoryItem(history.length - 1 - index);
-			
-			const time = document.createElement('div');
-			time.className = 'history-item-time';
-			time.textContent = new Date(item.timestamp).toLocaleString();
-			
-			const operation = document.createElement('div');
-			operation.className = 'history-item-operation';
-			operation.textContent = item.operation === 'changeSubdomains' ? `Changed Subdomains to "${item.newSubdomain}"` : `Added Asterisk`;
-			
-			historyItem.appendChild(time);
-			historyItem.appendChild(operation);
-			historyList.appendChild(historyItem);
-		});
-	}
+                        self.postMessage({ validDomains, invalidDomains });
+                    }
+                };
+            `], { type: 'application/javascript' });
+            const workerUrl = URL.createObjectURL(workerBlob);
+            worker = new Worker(workerUrl);
+        } else {
+            alert('Your browser does not support Web Workers. The application may not function as expected.');
+        }
 
-	function saveHistory(action) {
-		const history = JSON.parse(localStorage.getItem(historyKey)) || [];
-		history.push({
-			timestamp: Date.now(),
-			...action
-		});
-		localStorage.setItem(historyKey, JSON.stringify(history));
-		loadHistory();
-	}
+        // History Management
+        const historyKey = 'domainChangerHistory';
 
-	function loadHistoryItem(index) {
-		const history = JSON.parse(localStorage.getItem(historyKey)) || [];
-		const item = history[index];
-		if (item) {
-			document.getElementById('domains').value = item.domains.join('\n');
-			if (item.operation === 'changeSubdomains') {
-				document.getElementById('newSubdomain').value = item.newSubdomain;
-			} else {
-				document.getElementById('newSubdomain').value = '';
-			}
-			displayResults(item.validDomains, item.invalidDomains);
-			showNotification('Loaded history item.');
-		}
-	}
+        function loadHistory() {
+            const history = JSON.parse(localStorage.getItem(historyKey)) || [];
+            const historyList = document.getElementById('historyList');
+            historyList.innerHTML = '';
+            history.slice().reverse().forEach((item, index) => {
+                const historyItem = document.createElement('div');
+                historyItem.className = 'history-item';
+                historyItem.onclick = () => loadHistoryItem(history.length - 1 - index);
 
-	// Toggle History Panel
-	function toggleHistory() {
-		const panel = document.getElementById('historyPanel');
-		panel.classList.toggle('active');
-		loadHistory();
-	}
+                const time = document.createElement('div');
+                time.className = 'history-item-time';
+                time.textContent = new Date(item.timestamp).toLocaleString();
 
-	// Show Notification
-	function showNotification(message, isError = false) {
-		const notification = document.getElementById('notification');
-		notification.textContent = message;
-		notification.style.backgroundColor = isError ? '#e74c3c' : '#1abc9c';
-		notification.classList.add('show');
-		
-		setTimeout(() => {
-			notification.classList.remove('show');
-		}, 3000);
-	}
+                const operation = document.createElement('div');
+                operation.className = 'history-item-operation';
+                operation.textContent = item.operation === 'changeSubdomains' ? `Changed Subdomains to "${item.newSubdomain}"` : `Added Asterisk`;
 
-	// Process Domains using Web Worker
-	function processDomains(operation) {
-		const domainsInput = document.getElementById('domains').value;
-		const newSubdomain = document.getElementById('newSubdomain').value.trim();
-		const resultArea = document.getElementById('result');
+                historyItem.appendChild(time);
+                historyItem.appendChild(operation);
+                historyList.appendChild(historyItem);
+            });
+        }
 
-		if (operation === 'changeSubdomains' && !newSubdomain) {
-			showNotification('Please enter a new subdomain.', true);
-			return;
-		}
+        function saveHistory(action) {
+            const history = JSON.parse(localStorage.getItem(historyKey)) || [];
+            history.push({
+                timestamp: Date.now(),
+                ...action
+            });
+            localStorage.setItem(historyKey, JSON.stringify(history));
+            loadHistory();
+        }
 
-		const domains = domainsInput.split('\n').map(d => d.trim()).filter(d => d !== '');
-		if (worker) {
-			worker.postMessage({ type: 'processDomains', data: { domains, operation, newSubdomain } });
-			showNotification('Processing domains...');
-		} else {
-			showNotification('Web Workers are not supported in your browser.', true);
-		}
-	}
+        function loadHistoryItem(index) {
+            const history = JSON.parse(localStorage.getItem(historyKey)) || [];
+            const item = history[index];
+            if (item) {
+                document.getElementById('domains').value = item.domains.join('\n');
+                if (item.operation === 'changeSubdomains') {
+                    document.getElementById('newSubdomain').value = item.newSubdomain;
+                } else {
+                    document.getElementById('newSubdomain').value = '';
+                }
+                displayResults(item.validDomains, item.invalidDomains);
+                showNotification('Loaded history item.');
+            }
+        }
 
-	// Handle Web Worker Messages
-	if (worker) {
-		worker.onmessage = function(e) {
-			const { validDomains, invalidDomains } = e.data;
-			displayResults(validDomains, invalidDomains);
-			autoCopy(validDomains);
-			
-			// Save to history
-			const operation = this.currentOperation;
-			const newSubdomain = this.currentNewSubdomain;
-			if (operation === 'changeSubdomains') {
-				saveHistory({ operation, domains: this.currentDomains, newSubdomain, validDomains, invalidDomains });
-			} else if (operation === 'addAsterisk') {
-				saveHistory({ operation, domains: this.currentDomains, validDomains, invalidDomains });
-			}
-		}.bind({
-			currentOperation: '',
-			currentNewSubdomain: '',
-			currentDomains: []
-		});
-	}
+        // Toggle History Panel
+        function toggleHistory() {
+            const panel = document.getElementById('historyPanel');
+            panel.classList.toggle('active');
+            loadHistory();
+        }
 
-	// Change Subdomains
-	function changeSubdomains() {
-		const domainsInput = document.getElementById('domains').value;
-		const newSubdomain = document.getElementById('newSubdomain').value.trim();
-		const domains = domainsInput.split('\n').map(d => d.trim()).filter(d => d !== '');
-		
-		if (worker) {
-			worker.postMessage({ type: 'processDomains', data: { domains, operation: 'changeSubdomains', newSubdomain } });
-			
-			// Update worker state for history
-			worker.onmessage = function(e) {
-				const { validDomains, invalidDomains } = e.data;
-				displayResults(validDomains, invalidDomains);
-				autoCopy(validDomains);
-				
-				// Save to history
-				saveHistory({ 
-					operation: 'changeSubdomains', 
-					domains, 
-					newSubdomain, 
-					validDomains, 
-					invalidDomains 
-				});
-			};
-		} else {
-			showNotification('Web Workers are not supported in your browser.', true);
-		}
-	}
+        // Show Notification
+        function showNotification(message, isError = false) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.style.backgroundColor = isError ? '#e74c3c' : '#1abc9c';
+            notification.classList.add('show');
 
-	// Add Asterisk
-	function addAsterisk() {
-		const domainsInput = document.getElementById('domains').value;
-		const domains = domainsInput.split('\n').map(d => d.trim()).filter(d => d !== '');
-		
-		if (worker) {
-			worker.postMessage({ type: 'processDomains', data: { domains, operation: 'addAsterisk' } });
-			
-			// Update worker state for history
-			worker.onmessage = function(e) {
-				const { validDomains, invalidDomains } = e.data;
-				displayResults(validDomains, invalidDomains);
-				autoCopy(validDomains);
-				
-				// Save to history
-				saveHistory({ 
-					operation: 'addAsterisk', 
-					domains, 
-					validDomains, 
-					invalidDomains 
-				});
-			};
-		} else {
-			showNotification('Web Workers are not supported in your browser.', true);
-		}
-	}
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
 
-	// Display Results
-	function displayResults(valid, invalid) {
-		const resultArea = document.getElementById('result');
-		let output = '';
+        // Process Domains using Web Worker
+        function processDomains(operation) {
+            showLoadingIndicator();
+            const domainsInput = document.getElementById('domains').value;
+            const newSubdomain = document.getElementById('newSubdomain').value.trim();
+            const resultArea = document.getElementById('result');
 
-		if (valid.length > 0) {
-			output += valid.join('\n');
-		}
+            if (operation === 'changeSubdomains' && !newSubdomain) {
+                hideLoadingIndicator();
+                showNotification('Please enter a new subdomain.', true);
+                return;
+            }
 
-		if (invalid.length > 0) {
-			output += '\n\nInvalid Domains:\n';
-			invalid.forEach(domain => {
-				output += `Invalid domain: ${domain}\n`;
-			});
-		}
+            const domains = domainsInput.split('\n').map(d => d.trim()).filter(d => d !== '');
+            if (worker) {
+                worker.postMessage({ type: 'processDomains', data: { domains, operation, newSubdomain } });
+                showNotification('Processing domains...');
+            } else {
+                hideLoadingIndicator();
+                showNotification('Web Workers are not supported in your browser.', true);
+            }
+        }
 
-		resultArea.value = output.trim();
-	}
+        // Handle Web Worker Messages
+        if (worker) {
+            worker.onmessage = function(e) {
+                hideLoadingIndicator();
+                const { validDomains, invalidDomains } = e.data;
+                displayResults(validDomains, invalidDomains);
+                autoCopy(validDomains);
 
-	// Automatic Copy Function
-	function autoCopy(validDomains) {
-		if (validDomains.length === 0) return;
+                // Save to history
+                const operation = this.currentOperation;
+                const newSubdomain = this.currentNewSubdomain;
+                if (operation === 'changeSubdomains') {
+                    saveHistory({ operation, domains: this.currentDomains, newSubdomain, validDomains, invalidDomains });
+                } else if (operation === 'addAsterisk') {
+                    saveHistory({ operation, domains: this.currentDomains, validDomains, invalidDomains });
+                }
+            }.bind({
+                currentOperation: '',
+                currentNewSubdomain: '',
+                currentDomains: []
+            });
+        }
 
-		const validText = validDomains.join('\n');
-		navigator.clipboard.writeText(validText)
-			.then(() => {
-				showNotification('Valid domains automatically copied to clipboard.');
-			})
-			.catch(err => {
-				showNotification('Failed to automatically copy valid domains.', true);
-				console.error('Error copying text: ', err);
-			});
-	}
+        // Change Subdomains
+        function changeSubdomains() {
+            const domainsInput = document.getElementById('domains').value;
+            const newSubdomain = document.getElementById('newSubdomain').value.trim();
+            const domains = domainsInput.split('\n').map(d => d.trim()).filter(d => d !== '');
 
-	// Copy Valid Domains Manually
-	function copyValidDomains() {
-		const resultContent = document.getElementById('result').value;
-		const lines = resultContent.split('\n');
-		const validLines = [];
+            if (worker) {
+                worker.postMessage({ type: 'processDomains', data: { domains, operation: 'changeSubdomains', newSubdomain } });
 
-		lines.forEach(line => {
-			if (!line.startsWith('Invalid domain:') && line.trim() !== '') {
-				validLines.push(line.trim());
-			}
-		});
+                // Update worker state for history
+                worker.onmessage = function(e) {
+                    const { validDomains, invalidDomains } = e.data;
+                    displayResults(validDomains, invalidDomains);
+                    autoCopy(validDomains);
 
-		if (validLines.length === 0) {
-			showNotification('There are no valid domains to copy.', true);
-			return;
-		}
+                    // Save to history
+                    saveHistory({
+                        operation: 'changeSubdomains',
+                        domains,
+                        newSubdomain,
+                        validDomains,
+                        invalidDomains
+                    });
+                };
+            } else {
+                showNotification('Web Workers are not supported in your browser.', true);
+            }
+        }
 
-		const validText = validLines.join('\n');
-		navigator.clipboard.writeText(validText)
-			.then(() => {
-				showNotification('Valid domains copied to clipboard.');
-			})
-			.catch(err => {
-				showNotification('Failed to copy valid domains.', true);
-				console.error('Error copying text: ', err);
-			});
-	}
-	
-	//Fetch random words 
-	function fetchRandomSubdomain() {
-    fetch('https://random-word-api.herokuapp.com/word?number=2')
-        .then(response => response.json())
-        .then(data => {
-            // Concatenate the two words with a hyphen
-            const subdomain = data[0] + '-' + data[1];
-            document.getElementById('newSubdomain').value = subdomain;
-        })
-        .catch(error => {
-            console.error('Error fetching random words:', error);
-            document.getElementById('newSubdomain').value = 'Error fetching words';
+        // Add Asterisk
+        function addAsterisk() {
+            const domainsInput = document.getElementById('domains').value;
+            const domains = domainsInput.split('\n').map(d => d.trim()).filter(d => d !== '');
+
+            if (worker) {
+                worker.postMessage({ type: 'processDomains', data: { domains, operation: 'addAsterisk' } });
+
+                // Update worker state for history
+                worker.onmessage = function(e) {
+                    const { validDomains, invalidDomains } = e.data;
+                    displayResults(validDomains, invalidDomains);
+                    autoCopy(validDomains);
+
+                    // Save to history
+                    saveHistory({
+                        operation: 'addAsterisk',
+                        domains,
+                        validDomains,
+                        invalidDomains
+                    });
+                };
+            } else {
+                showNotification('Web Workers are not supported in your browser.', true);
+            }
+        }
+
+        // Display Results
+        function displayResults(valid, invalid) {
+            const resultArea = document.getElementById('result');
+            let output = '';
+
+            if (valid.length > 0) {
+                output += valid.join('\n');
+            }
+
+            if (invalid.length > 0) {
+                output += '\n\nInvalid Domains:\n';
+                invalid.forEach(domain => {
+                    output += `Invalid domain: ${domain}\n`;
+                });
+            }
+
+            resultArea.value = output.trim();
+        }
+
+        // Automatic Copy Function
+        function autoCopy(validDomains) {
+            if (validDomains.length === 0) return;
+
+            const validText = validDomains.join('\n');
+            navigator.clipboard.writeText(validText)
+                .then(() => {
+                    showNotification('Valid domains automatically copied to clipboard.');
+                })
+                .catch(err => {
+                    showNotification('Failed to automatically copy valid domains.', true);
+                    console.error('Error copying text: ', err);
+                });
+        }
+
+        // Copy Valid Domains Manually
+        function copyValidDomains() {
+            const resultContent = document.getElementById('result').value;
+            const lines = resultContent.split('\n');
+            const validLines = [];
+
+            lines.forEach(line => {
+                if (!line.startsWith('Invalid domain:') && line.trim() !== '') {
+                    validLines.push(line.trim());
+                }
+            });
+
+            if (validLines.length === 0) {
+                showNotification('There are no valid domains to copy.', true);
+                return;
+            }
+
+            const validText = validLines.join('\n');
+            navigator.clipboard.writeText(validText)
+                .then(() => {
+                    showNotification('Valid domains copied to clipboard.');
+                })
+                .catch(err => {
+                    showNotification('Failed to copy valid domains.', true);
+                    console.error('Error copying text: ', err);
+                });
+        }
+
+        // Fetch random words
+        function fetchRandomSubdomain() {
+            showLoadingIndicator();
+            fetch('https://random-word-api.herokuapp.com/word?number=2')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    hideLoadingIndicator();
+                    // Concatenate the two words with a hyphen
+                    const subdomain = data[0] + '-' + data[1];
+                    document.getElementById('newSubdomain').value = subdomain;
+                    showNotification('Random subdomain fetched successfully.');
+                })
+                .catch(error => {
+                    hideLoadingIndicator();
+                    console.error('Error fetching random words:', error);
+                    document.getElementById('newSubdomain').value = 'Error fetching words';
+                    showNotification('Failed to fetch random subdomain.', true);
+                });
+        }
+
+        // Clear All Fields
+        function clearAll() {
+            if (confirm('Are you sure you want to clear all fields?')) {
+                document.getElementById('domains').value = '';
+                document.getElementById('newSubdomain').value = '';
+                document.getElementById('result').value = '';
+                showNotification('All fields have been cleared.');
+            }
+        }
+
+        // Clear History
+        function clearHistory() {
+            if (confirm('Are you sure you want to clear the history?')) {
+                localStorage.removeItem(historyKey);
+                loadHistory();
+                showNotification('History has been cleared.');
+            }
+        }
+
+        // Import Domains
+        document.getElementById('importFile').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const content = e.target.result;
+                    document.getElementById('domains').value = content;
+                    showNotification('Domains imported successfully.');
+                };
+                reader.readAsText(file);
+            }
         });
-}
 
-	// Clear All Fields
-	function clearAll() {
-		if (confirm('Are you sure you want to clear all fields?')) {
-			document.getElementById('domains').value = '';
-			document.getElementById('newSubdomain').value = '';
-			document.getElementById('result').value = '';
-			showNotification('All fields have been cleared.');
-		}
-	}
+        // Show Loading Indicator
+        function showLoadingIndicator() {
+            document.getElementById('loadingIndicator').style.display = 'block';
+        }
 
-	// Initial Load
-	document.addEventListener('DOMContentLoaded', () => {
-		loadHistory();
-	});
+        // Hide Loading Indicator
+        function hideLoadingIndicator() {
+            document.getElementById('loadingIndicator').style.display = 'none';
+        }
+
+        // Initial Load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadHistory();
+        });
     </script>
 </body>
 </html>
